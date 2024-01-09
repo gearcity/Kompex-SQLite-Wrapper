@@ -536,4 +536,20 @@ int SQLiteDatabase::GetLookasideMemoryMissCountDueToFullMemory(bool resetValue)
 	return GetRuntimeStatusInformation(SQLITE_DBSTATUS_LOOKASIDE_MISS_FULL, true, resetValue);
 }
 
+std::string SQLiteDatabase::pendingTransactions()
+{
+  std::string pending = "";
+  std::string tmpString = "";
+  sqlite3_stmt *stmt;
+
+  for(stmt = sqlite3_next_stmt(mDatabaseHandle, NULL); stmt; stmt = sqlite3_next_stmt(mDatabaseHandle, stmt))
+  {
+    tmpString = sqlite3_sql(stmt);
+    pending += tmpString + "\n\n";
+  }
+
+  return pending;
+
+}
+
 }	// namespace Kompex

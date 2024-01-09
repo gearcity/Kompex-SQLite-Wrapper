@@ -738,7 +738,8 @@ void SQLiteStatement::CommitTransaction()
 		{
 			std::cerr << "Exception Occured!" << std::endl;
 			exception.Show();
-			RollbackTransaction();
+			KOMPEX_EXCEPT("Exception Occured: Transaction Failed: " + exception.GetErrorDescription(), -1);
+			//RollbackTransaction();
 			std::cerr << "Rollback has been executed!" << std::endl;
 			CleanUpTransaction();
 		}

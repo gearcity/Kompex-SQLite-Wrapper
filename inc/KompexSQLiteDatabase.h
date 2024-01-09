@@ -308,6 +308,8 @@ namespace Kompex
 		//! @param resetValue	Allows to reset the highest value.
 		int GetLookasideMemoryMissCountDueToFullMemory(bool resetValue = false);
 
+		std::string pendingTransactions();
+
 	protected:
 		//! Callback function for ActivateTracing() [sqlite3_trace]
 		static void TraceOutput(void *ptr, const char *sql);
